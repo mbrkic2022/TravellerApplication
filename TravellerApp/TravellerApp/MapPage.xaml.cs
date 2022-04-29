@@ -27,6 +27,40 @@ namespace TravellerApp
         {
             base.OnAppearing();
             GetLocation();
+            GetPosts();
+        }
+
+        private void GetPosts()
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
+            {
+                conn.CreateTable<Post>();
+                var posts = conn.Table<Post>().ToList();
+                DisplayOnMap(posts);
+            }
+        }
+
+        private void DisplayOnMap(List<Post> posts)
+        {
+            foreach(var post in posts)
+            {
+                try
+                {
+                    var pinCoordinates = new Xamarin.Forms.Maps.Position(post.Latitude, post.Longitude);
+                    var pin = new Pin()
+                    {
+                        Position = pinCoordinates,
+                        Label = post.Municipality,
+                        Address = post.Address,
+                        Type = PinType.SavedPin
+                    };
+                    locationsMap.Pins.Add(pin);
+                }
+                catch (NullReferenceException nre)
+                { }
+                catch (Exception ex)
+                { }
+            }
         }
 
         protected override void OnDisappearing()

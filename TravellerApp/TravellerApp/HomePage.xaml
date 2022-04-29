@@ -7,6 +7,6 @@
     <local:MapPage Title="Map"/>
     <local:ProfilePage Title="Profile"/>
     <TabbedPage.ToolbarItems>
-        <ToolbarItem Text="Add" Clicked="ToolbarItem_Clicked"/>
+        <ToolbarItem Text="Add" IconImageSource="add.png" Clicked="ToolbarItem_Clicked"/>
     </TabbedPage.ToolbarItems>
 </TabbedPage>

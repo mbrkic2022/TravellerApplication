@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TravellerApp.Helper;
 using Xamarin.Forms;
 
 namespace TravellerApp
@@ -17,13 +18,14 @@ namespace TravellerApp
             iconImage.Source = ImageSource.FromResource("TravellerApp.Assets.Images.plane.png", assembly);
         }
 
-        private void loginButton_Clicked(object sender, EventArgs e)
+        private async void loginButton_Clicked(object sender, EventArgs e)
         {
             bool isEmailEmpty = string.IsNullOrEmpty(userEntry.Text);
             bool isPasswordEmpty = string.IsNullOrEmpty(passEntry.Text);
             if (!isEmailEmpty && !isPasswordEmpty)
             {
-                Navigation.PushAsync(new HomePage());
+                bool result = await Auth.LoginUser(userEntry.Text, passEntry.Text);
+                if (result) await Navigation.PushAsync(new HomePage());
             }
             else
             {
