@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.companyname.travellerappp" android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="31" />
 	<application android:label="TravellerApp.Android" android:theme="@style/MainTheme">
-		<meta-data android:name="com.google.android.geo.API_KEY" android:value="***"/>
+		<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyBRgI0v3RvNfYtAXKI4gxfXLVPbwg_rewE"/>
 		<meta-data android:name="con.google.anroid.gms.version" android:value="@integer/google_play_services_version"/>
 		<uses-library android:name="org.apache.http.legacy" android:required="false"/>
 	</application>
