@@ -7,10 +7,8 @@ namespace TravellerApp.Model
 {
     public class Post
     {
-        [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
-
-        [MaxLength(250)]
+        public string Id { get; set; }
+        public string UserId { get; set; }
         public string Experience { get; set; }
         public string Country { get; set; }
         public string Address { get; set; }

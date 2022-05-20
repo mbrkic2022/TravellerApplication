@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TravellerApp.Helper;
 using TravellerApp.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -21,15 +22,17 @@ namespace TravellerApp
             experienceEntry.Text = selectedPost.Experience;
         }
 
-        private void deleteButton_Clicked(object sender, EventArgs e)
+        private async void deleteButton_Clicked(object sender, EventArgs e)
         {
-            using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
-            {
-                conn.CreateTable<Post>();
-                int rows = conn.Delete(SelectedPost);
-                if (rows > 0)
-                    DisplayAlert("Success", "Experience successfully deleted", "OK");
-            }
+            //using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
+            //{
+            //    conn.CreateTable<Post>();
+            //    int rows = conn.Delete(SelectedPost);
+            //    if (rows > 0)
+            //        DisplayAlert("Success", "Experience successfully deleted", "OK");
+            //}
+            bool result = await Firestore.Delete(SelectedPost);
+            if (result) await Navigation.PopAsync();
         }
     }
 }

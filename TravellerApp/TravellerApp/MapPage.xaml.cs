@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TravellerApp.Helper;
 using TravellerApp.Model;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -30,14 +31,15 @@ namespace TravellerApp
             GetPosts();
         }
 
-        private void GetPosts()
+        private async void GetPosts()
         {
-            using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
-            {
-                conn.CreateTable<Post>();
-                var posts = conn.Table<Post>().ToList();
+            //using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
+            //{
+            //    conn.CreateTable<Post>();
+            //    var posts = conn.Table<Post>().ToList();
+            var posts = await Firestore.Read();
                 DisplayOnMap(posts);
-            }
+            //}
         }
 
         private void DisplayOnMap(List<Post> posts)

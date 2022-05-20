@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TravellerApp.Helper;
 using TravellerApp.Logic;
 using TravellerApp.Model;
 using Xamarin.Forms;
@@ -45,13 +46,21 @@ namespace TravellerApp
                     Latitude = position.Latitude,
                     Longitude = position.Longitude
                 };
-                using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
+                //using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
+                //{
+                //    conn.CreateTable<Post>();
+                //    int rows = conn.Insert(post);
+                //    if (rows > 0)
+                //        DisplayAlert("Success", "Experience successfully inserted", "OK");
+                //}
+                bool result = Firestore.Insert(post);
+                if (result)
                 {
-                    conn.CreateTable<Post>();
-                    int rows = conn.Insert(post);
-                    if (rows > 0)
-                        DisplayAlert("Success", "Experience successfully inserted", "OK");
+                    experienceEntry.Text = "";
+                    DisplayAlert("Success", "Experience successfully inserted", "OK");
                 }
+                else
+                    DisplayAlert("Failure", "Experience not inserted, please try again!", "OK");
             }
             catch (Exception ex)
             {
